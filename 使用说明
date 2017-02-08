@@ -1,0 +1,6 @@
+1、这是一个SpringBoot项目，不用tomcat也可以通过"java -jar xxxx.jar"的方式运行
+2、如果想修改服务的ip和地址信息，修改"GeetestIdentification\src\main\resources\application.properties"文件中的相关信息即可
+3、验证通过率达不到100%，一般验证结果会出现三种情况：
+验证失败：这个一般是网速较慢，js执行不完整，导致鼠标事件没有执行完成，结果滑块没有拖动到位
+再来一次：这个一般是鼠标轨迹数据不符合极验验证码的行为检测，这个时候可以根据算法刷新轨迹数据
+验证成功：验证通过
