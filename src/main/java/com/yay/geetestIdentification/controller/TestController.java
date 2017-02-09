@@ -70,33 +70,4 @@ public class TestController {
         return result != null && (result.contains("验证通过") || result.contains("不存在极验验证码"));
     }
 
-    public static void main(String[] args) {
-        int totalCount = 20;//测试的次数
-        int successCount = 0;
-        int retryCount = 0;
-        String pageUrl = "http://user.geetest.com/login?url=http:%2F%2Faccount.geetest.com%2Freport";
-        String deltaResolveAddress = String.format("http://%s:%s/%s/resolveGeetestSlicePosition", "127.0.0.1", 8068, "/geetest");
-        StopWatch stopWatch = new StopWatch();
-        for (int i = 0; i < totalCount; i++) {
-            stopWatch.reset();
-            stopWatch.start();
-            if (startIdentification(pageUrl, "geetest_refresh.js", deltaResolveAddress))
-                successCount++;
-            else {
-                int t = retryCount;
-                while (t > 0) {
-                    System.out.println("重试一次");
-                    if (startIdentification(pageUrl, "geetest_refresh.js", deltaResolveAddress)) {
-                        successCount++;
-                        break;
-                    }
-                    t--;
-                }
-            }
-            stopWatch.stop();
-            logger.debug("本次调用耗时：(毫秒)" + stopWatch.getTime());
-        }
-        String result = "调用" + totalCount + "次，失败重试" + retryCount + "次的情况下，共成功" + successCount + "次";
-        logger.debug(result);
-    }
 }
